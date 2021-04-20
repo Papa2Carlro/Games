@@ -1,0 +1,329 @@
+
+// 1200
+@include media-breakpoint-down(lg) {
+    .skill {
+        $sq: 40px;
+        $sq-font: 26px;
+        $central: 35%;
+        $max: 400px;
+        $parent: &;
+
+        margin: 25px 0;
+
+        &__item {
+
+            &-clip {
+                width: $sq;
+                height: $sq;
+
+                font-size: $sq-font;
+                letter-spacing: 1.2px;
+                padding: 0 0 0 6px;
+
+                &:after {
+                    top: -10px;
+                    right: 7px;
+
+                    width: 1px;
+                    height: 38px;
+                    border-right: 2px solid $white;
+                }
+            }
+
+            &-body {
+                width: 15px;
+
+                font-size: 16px;
+                line-height: 120%;
+
+                &.anim2 {
+                    width: $max;
+                }
+            }
+
+            &-text {
+                min-width: $max;
+                padding: 6px 12px 6px 18px;
+            }
+
+            & + & {
+                margin-left: 15px;
+            }
+        }
+
+        &--top {
+            left: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+
+                        &.anim1 {
+                            top: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--bottom {
+            right: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+                        right: $sq - 15;
+                        bottom: -10px;
+
+                        &.anim1 {
+                            bottom: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 992
+@include media-breakpoint-down(md) {
+    .skill {
+        $sq: 40px;
+        $sq-font: 26px;
+        $central: 25%;
+        $max: 350px;
+        $parent: &;
+
+        margin: 25px 0;
+
+        &__item {
+
+            &-clip {
+                width: $sq;
+                height: $sq;
+
+                font-size: $sq-font;
+                letter-spacing: 1.05px;
+                padding: 0 0 0 4px;
+
+                &:after {
+                    top: -10px;
+                    right: 7px;
+
+                    width: 1px;
+                    height: 38px;
+                    border-right: 2px solid $white;
+                }
+            }
+
+            &-body {
+                width: 15px;
+
+                font-size: 16px;
+                line-height: 120%;
+
+                &.anim2 {
+                    width: $max;
+                }
+            }
+
+            &-text {
+                min-width: $max;
+                padding: 6px 12px 6px 18px;
+            }
+
+            & + & {
+                margin-left: 15px;
+            }
+        }
+
+        &--top {
+            left: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+
+                        &.anim1 {
+                            top: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--bottom {
+            right: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+                        right: $sq - 15;
+                        bottom: -10px;
+
+                        &.anim1 {
+                            bottom: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 768
+@include media-breakpoint-down(sm) {
+    .skill {
+        $sq: 40px;
+        $sq-font: 24px;
+        $central: 100px;
+        $max: 285px;
+        $parent: &;
+
+        margin: 20px 0;
+
+        &__item {
+
+            &-body {
+                width: 15px;
+
+                font-size: 16px;
+                line-height: 120%;
+
+                &.anim2 {
+                    width: $max;
+                }
+            }
+
+            &-text {
+                min-width: $max;
+                padding: 6px 12px 6px 18px;
+            }
+
+            & + & {
+                margin-left: 15px;
+            }
+        }
+
+        &--top {
+            left: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+
+                        &.anim1 {
+                            top: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--bottom {
+            right: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+                        right: $sq - 15;
+                        bottom: -10px;
+
+                        &.anim1 {
+                            bottom: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 576
+@media screen and (max-width: 576px) {
+    .skill {
+        $sq: 40px;
+        $sq-font: 24px;
+        $central: 75px;
+        $parent: &;
+
+        &__item {
+            $item: &;
+
+            & + & {
+                margin-left: 10px;
+            }
+
+            @for $i from 1 through 20 {
+                $max: calc(100vw - #{$central + ($i - 1) * $sq + ($i - 1) * 10});
+
+                &:nth-child(#{$i}) {
+
+                    #{$item} {
+
+                        &-body {
+
+                            &.anim2 {
+                                width: $max;
+                            }
+                        }
+
+                        &-text {
+                            min-width: $max;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--top {
+            left: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+
+                        &.anim1 {
+                            top: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--bottom {
+            right: auto;
+            left: $central;
+
+            #{$parent} {
+
+                &__item {
+
+                    &-body {
+                        right: auto;
+                        left: 0;
+                        bottom: -10px;
+
+                        &.anim1 {
+                            bottom: calc(100% + 4px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
