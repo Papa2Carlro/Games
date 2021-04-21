@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel ./src/index.html --port 4300 --https --open",
-    "build": "NODE_ENV=development parcel build ./src/index.html --out-dir build --no-cache"
+    "build": "parcel build ./src/index.html --out-dir build --no-cache"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0"
+    "bootstrap": "^4.6.0",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "node-sass": "^5.0.0",

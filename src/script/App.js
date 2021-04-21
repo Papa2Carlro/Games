@@ -1,7 +1,7 @@
 // Pages
 import List from "./pages/List"
 // Games
-import GAME_2048 from "./pages/games/2048"
+import GAME_2048 from "./pages/games/2048/2048"
 // Helper
 import proxyHandlerPages from "./helper/proxyHandlerPages"
 
@@ -9,6 +9,7 @@ export default class App {
     constructor(root) {
         this.$root = document.body.querySelector(root)
         this.$loader = document.body.querySelector('#loader')
+        this.$title = document.head.querySelector('title')
 
         // Pages
         this.list = new List(this.$root, this)

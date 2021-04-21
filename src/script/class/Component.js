@@ -1,4 +1,15 @@
+require('dotenv').config()
+
 export default class Component {
+    constructor(root, parent, options) {
+        this.$root = root
+        this.$parent = parent
+
+        // Constants
+        this.NAME = options.name
+        this.URL = options.url
+        this.TITLE = options.title
+    }
 
     link(url) {
         this.$parent.proxy.page = url
@@ -10,6 +21,9 @@ export default class Component {
     }
 
     render() {
+        console.clear()
+        this.$parent.$title.textContent = this.TITLE
+
         this.$root.innerHTML = ''
         this.$root.insertAdjacentHTML('beforeend', this.template())
 
@@ -18,14 +32,16 @@ export default class Component {
     }
 
     template() {
-        throw new Error('Метод template должен быть реализован')
+        throw new Error(`Метод template должен быть реализован в классе ${this.NAME}`)
     }
 
     initConstructor() {
-        throw new Error('Метод initConstructor должен быть реализован')
+        process.env.NODE_ENV === 'development'
+            ? console.warn(`Метод initConstructor не реализован в классе ${this.NAME}`)
+            : console.clear()
     }
 
     init() {
-        throw new Error('Метод init должен быть реализован')
+        throw new Error(`Метод init должен быть реализован в классе ${this.NAME}`)
     }
 }

@@ -1,0 +1,35 @@
+.game2048 {
+    padding: 1.5em 2.5em;
+
+    &__header {
+
+    }
+}
+
+// 1200
+@include media-breakpoint-down(lg) {
+    .game2048 {
+
+    }
+}
+
+// 992
+@include media-breakpoint-down(md) {
+    .game2048 {
+        padding: 1em 2em;
+    }
+}
+
+// 768
+@include media-breakpoint-down(sm) {
+    .game2048 {
+
+    }
+}
+
+// 576
+@media screen and (max-width: 576px) {
+    .game2048 {
+
+    }
+}
