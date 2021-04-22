@@ -99,19 +99,16 @@
     will-change: transform;
 
     user-select: none;
-    transition: .2s 0s linear;
 
     color: $title;
     font-size: 40px;
     font-weight: 700;
 
+    transform: translate() scale();
+
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &.motion {
-        transition: .1s 0s ease-in-out;
-    }
 }
 
 // 1200

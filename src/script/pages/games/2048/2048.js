@@ -3,9 +3,10 @@ import Component from "../../../class/Component"
 // Data
 import tail from './tile.json'
 // Help
+import coords from "./coords"
 import template from "./template"
+import createTail from "./createTail"
 import css from "../../../helper/css"
-import random from "../../../helper/random"
 import roundRect from "../../../helper/roundRect"
 // Event
 import keydown from "./keydown"
@@ -49,6 +50,7 @@ export default class GAME_2048 extends Component {
             [0, 0, 0, 0],
             [0, 0, 0, 0]
         ]
+        this.tailList = []
 
         this.ctx = undefined
     }
@@ -72,34 +74,27 @@ export default class GAME_2048 extends Component {
         document.addEventListener('keydown', keydown.bind(this))
     }
 
+    newGame() {
+        this.field = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        this.tailList = []
+
+        this.$game.innerHTML = ''
+
+        for (let i = 0; i < 2; i++) createTail.call(this)
+    }
+
     paint() {
-        for (let i = 0; i < 2; i++) this.createTail()
-
+        this.newGame()
         this.bgTail()
+
+        this.$newGame.addEventListener('click', () => this.newGame())
     }
 
-    createTail() {
-        const value = random('tail')
-        const [x, y] = random('coords', this)
-        this.field[y][x] = value
-
-        this.$game.insertAdjacentHTML('beforeend', `
-            <div data-value="${value}"
-                data-coords="${x + ',' + y}"
-                class="tail motion"
-                style="
-                    transform: translate(${this.coords(x)}px, ${this.coords(y)}px) scale(0.5);
-                    width: ${this.TAIL_WIDTH / 2}px;
-                    height: ${this.TAIL_HEIGHT / 2}px;
-                    background: ${tail[value].tile};
-                ">${value}</div>`)
-
-        const elem = this.$root.querySelector(`[data-coords="${x + ',' + y}"]`)
-        setTimeout(() => {
-            elem.style.transform = `translate(${this.coords(x)}px, ${this.coords(y)}px)`
-        }, 300)
-        setTimeout(() => elem.classList.remove('motion'), 400)
-    }
     bgTail() {
         for (let iY = 0; iY < this.COLS_COUNT; iY++) {
             for (let iX = 0; iX < this.ROWS_COUNT; iX++) {
@@ -110,38 +105,7 @@ export default class GAME_2048 extends Component {
             }
         }
     }
-    setTail(tail, x, y) {
-        // TODO: dinamic transition
-        tail.dataset.coords = x + ',' + y
-        tail.style.transform = `translate(${this.coords(x)}px, ${this.coords(y)}px)`
 
-        return 300 // transiton
-    }
-    mergeTail(x, y, value, ms) {
-        console.log(x, y, value, ms)
-        const mergeList = this.$game.querySelectorAll(`[data-coords="${x + ',' + y}"]`)
-        console.log(mergeList)
-
-        const [xC, yC] = [this.coords(x), this.coords(y)]
-
-        setTimeout(() => {
-            mergeList[0].style.transform = `translate(${xC}px, ${yC}px) scale(1.2)`
-            mergeList[0].style.transition = `140ms 0s linear`
-
-            mergeList[0].textContent = value
-            mergeList[0].style.background = tail[value].tile
-
-            mergeList[1].remove()
-        }, ms)
-
-        setTimeout(() => {
-            mergeList[0].style.transform = `translate(${xC}px, ${yC}px)`
-            mergeList[0].style.transition = `.2s 0s ease`
-        }, ms + 140)
-    }
-    coords(val) {
-        return ((val * this.TAIL_WIDTH / 2) + ((val + 1) * this.MARGIN) / 2)
-    }
     setSize() {
         const lists = ['$body', '$canvas']
 

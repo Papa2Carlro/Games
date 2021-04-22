@@ -1,7 +1,11 @@
+import setTail from "./setTail"
+import mergeTail from "./mergeTail"
+import createTail from "./createTail"
+
 export default function keydown(e) {
     if (!this.allowed) return
     this.allowed = false
-    setTimeout(() => this.allowed = true, 220)
+    setTimeout(() => this.allowed = true, 260)
 
     const tails = []
 
@@ -20,20 +24,23 @@ export default function keydown(e) {
             })
 
             for (const [x, y] of tails) {
-                const tail = this.$game.querySelector(`[data-coords="${x + ',' + y}"]`)
+                const [tail, index] = getTail.call(this, x, y)
 
                 for (let i = 0; i < 4; i++) {
                     if (i === y) {
                         break
                     } else if (this.field[i][x] === this.field[y][x]) {
                         this.field[i][x] = this.field[y][x] * 2
-                        const ms = this.setTail(tail, x, i)
-                        this.mergeTail(x, i, this.field[i][x], ms)
+
+                        setTail.call(this, tail.dom, x, i, index)
+                        mergeTail.call(this, x, i, this.field[i][x])
+
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[i][x]) {
                         this.field[i][x] = this.field[y][x]
-                        this.setTail(tail, x, i)
+
+                        setTail.call(this, tail.dom, x, i, index)
                         this.field[y][x] = 0
                         break
                     }
@@ -49,20 +56,23 @@ export default function keydown(e) {
             })
 
             for (const [x, y] of tails) {
-                const tail = this.$game.querySelector(`[data-coords="${x + ',' + y}"]`)
+                const [tail, index] = getTail.call(this, x, y)
 
                 for (let i = 3; i >= 0; i--) {
                     if (i === y) {
                         break
                     } else if (this.field[i][x] === this.field[y][x]) {
                         this.field[i][x] = this.field[y][x] * 2
-                        const ms = this.setTail(tail, x, i)
-                        this.mergeTail(x, i, this.field[i][x], ms)
+
+                        setTail.call(this, tail.dom, x, i, index)
+                        mergeTail.call(this, x, i, this.field[i][x])
+
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[i][x]) {
                         this.field[i][x] = this.field[y][x]
-                        this.setTail(tail, x, i)
+
+                        setTail.call(this, tail.dom, x, i, index)
                         this.field[y][x] = 0
                         break
                     }
@@ -78,20 +88,23 @@ export default function keydown(e) {
             })
 
             for (const [x, y] of tails) {
-                const tail = this.$game.querySelector(`[data-coords="${x + ',' + y}"]`)
+                const [tail, index] = getTail.call(this, x, y)
 
                 for (let i = 0; i < 4; i++) {
                     if (i === x) {
                         break
                     } else if (this.field[y][i] === this.field[y][x]) {
                         this.field[y][i] = this.field[y][x] * 2
-                        const ms = this.setTail(tail, i, y)
-                        this.mergeTail(i, y, this.field[y][i], ms)
+
+                        setTail.call(this, tail.dom, i, y, index)
+                        mergeTail.call(this, i, y, this.field[y][i])
+
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[y][i]) {
                         this.field[y][i] = this.field[y][x]
-                        this.setTail(tail, i, y)
+
+                        setTail.call(this, tail.dom, i, y, index)
                         this.field[y][x] = 0
                         break
                     }
@@ -107,20 +120,23 @@ export default function keydown(e) {
             })
 
             for (const [x, y] of tails) {
-                const tail = this.$game.querySelector(`[data-coords="${x + ',' + y}"]`)
+                const [tail, index] = getTail.call(this, x, y)
 
                 for (let i = 3; i >= 0; i--) {
                     if (i === x) {
                         break
                     } else if (this.field[y][i] === this.field[y][x]) {
                         this.field[y][i] = this.field[y][x] * 2
-                        const ms = this.setTail(tail, i, y)
-                        this.mergeTail(i, y, this.field[y][i], ms)
+
+                        setTail.call(this, tail.dom, i, y, index)
+                        mergeTail.call(this, i, y, this.field[y][i])
+
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[y][i]) {
                         this.field[y][i] = this.field[y][x]
-                        this.setTail(tail, i, y)
+
+                        setTail.call(this, tail.dom, i, y, index)
                         this.field[y][x] = 0
                         break
                     }
@@ -129,5 +145,17 @@ export default function keydown(e) {
             break
     }
 
-    this.createTail()
+    createTail.call(this)
+}
+
+function getTail(x, y) {
+    let index
+
+    return [
+        this.tailList.filter((elem, i) => {
+            if (elem.coords.x === x && elem.coords.y === y) index = i
+            return elem.coords.x === x && elem.coords.y === y
+        })[0],
+        index
+    ]
 }

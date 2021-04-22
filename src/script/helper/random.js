@@ -2,23 +2,19 @@ export default function random(type, _this) {
     switch (type) {
         case 'tail':
             const res = randIntException(1, 10, [])
-            console.log(res)
             return res < 9 ? 2 : 4
             break
 
         case 'coords':
-            let x
-            let y
-
             const expX = []
             const expY = []
             _this.field.map((row, i) => {
                 if (row.filter(tail => tail).length === 4) expX.push(i)
             })
-            x = randIntException(0, 3, expX)
+            const x = randIntException(0, 3, expX)
 
             for (let i = 0; i < 4; i++) if (_this.field[i][x]) expY.push(i)
-            y = randIntException(0, 3, expY)
+            const y = randIntException(0, 3, expY)
 
             return [x, y]
             break
