@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel ./src/index.html --port 4300 --https --open",
+    "start": "parcel ./src/index.html --port 4300",
     "build": "parcel build ./src/index.html --out-dir build --no-cache"
   },
   "dependencies": {

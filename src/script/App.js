@@ -21,8 +21,10 @@ export default class App {
     }
 
     init() {
-        !this.page ? this.list.render() : this[this.page].render()
-        window.addEventListener('load', () => this.$loader.classList.add('hide'))
+        window.addEventListener('load', () => {
+            this.$loader.classList.add('hide')
+            this[!this.page ? 'list': this.page].render()
+        })
     }
 
     get page() {

@@ -2,7 +2,19 @@ export default function template() {
     return `
         <div class="container">
             <div class="game2048">
-                ${header()}
+                ${header()} 
+                
+                <ul class="game2048__list">
+                    <li data-btn="new-game" class="game2048__list-btn">Новая Игра</li>
+                </ul>
+                
+                <div data-body class="game2048__body">
+                    <canvas class="game2048__body-canvas"></canvas>
+                    
+                    <div data-game class="game2048__game"></div>
+                    <div class="game2048__body-win"></div>
+                    <div class="game2048__body-lose"></div>
+                </div>
             </div>
         </div>`
 }

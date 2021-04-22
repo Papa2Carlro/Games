@@ -1,0 +1,40 @@
+{
+  "2": {
+    "tile": "#EEE4DA",
+    "dark": true
+  },
+  "4": {
+    "tile": "#EDE0C8",
+    "dark": true
+  },
+  "8": {
+    "tile": "#F2B179"
+  },
+  "16": {
+    "tile": "#F59563"
+  },
+  "32": {
+    "tile": "#F67C5F"
+  },
+  "64": {
+    "tile": "#F65E3B"
+  },
+  "128": {
+    "tile": "#EDCF72"
+  },
+  "256": {
+    "tile": "#EDCC61"
+  },
+  "512": {
+    "tile": "#EDC850",
+    "shadow": true
+  },
+  "1024": {
+    "tile": "#EDC53F",
+    "shadow": true
+  },
+  "2048": {
+    "tile": "#EDC22E",
+    "shadow": true
+  }
+}
