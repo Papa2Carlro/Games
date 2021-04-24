@@ -33,11 +33,18 @@ export default class List extends Component {
     }
 
     init() {
-        // TODO: Метод destroy
-        document.addEventListener('click', e => {
+        document.addEventListener('click', this.click(this))
+    }
+
+    destroy() {
+        document.removeEventListener('click', this.click(this))
+    }
+
+    click(_this) {
+        return e => {
             const target = e.target.closest('[data-card]')
-            if (target) this.link(target.dataset.link)
-        })
+            if (target) _this.link(target.dataset.link)
+        }
     }
 
     link(url) {

@@ -22,7 +22,7 @@ export default class GAME_2048 extends Component {
         // Constant
         this.WIDTH = 350
         this.HEIGHT = 350
-        this.MARGIN = 16
+        this.MARGIN = 18
         this.DPI_WIDTH = this.WIDTH * 2
         this.DPI_HEIGHT = this.HEIGHT * 2
         this.ROWS_COUNT = 4
@@ -41,6 +41,7 @@ export default class GAME_2048 extends Component {
         this.$game = undefined
         this.$score = undefined
         this.$newGame = undefined
+        this.$backBtn = undefined
 
         this.$canvas = undefined
 
@@ -59,6 +60,7 @@ export default class GAME_2048 extends Component {
         this.$game = this.$root.querySelector('[data-game]')
         this.$body = this.$root.querySelector('[data-body]')
         this.$best = this.$root.querySelector('[data-value="best"]')
+        this.$backBtn = this.$root.querySelector('[data-btn="back"]')
         this.$score = this.$root.querySelector('[data-value="score"]')
         this.$newGame = this.$root.querySelector('[data-btn="new-game"]')
 
@@ -71,7 +73,13 @@ export default class GAME_2048 extends Component {
         this.setSize()
         this.paint()
 
+        this.$backBtn.addEventListener('click', backEvent.bind(this))
         document.addEventListener('keydown', keydown.bind(this))
+    }
+
+    destroy() {
+        this.$backBtn.removeEventListener('click', backEvent.bind(this))
+        document.removeEventListener('keydown', keydown.bind(this))
     }
 
     newGame() {
@@ -82,10 +90,18 @@ export default class GAME_2048 extends Component {
             [0, 0, 0, 0]
         ]
         this.tailList = []
-
         this.$game.innerHTML = ''
 
-        for (let i = 0; i < 2; i++) createTail.call(this)
+        const tests = [
+            { value: 2, x: 0, y: 0 },
+            { value: 8, x: 1, y: 0 },
+            { value: 4, x: 2, y: 0 },
+            { value: 2, x: 3, y: 0 },
+        ]
+
+        tests.map(obj => createTail.call(this, 'obj', obj))
+
+        // for (let i = 0; i < 2; i++) createTail.call(this, 'random')
     }
 
     paint() {
@@ -125,4 +141,8 @@ export default class GAME_2048 extends Component {
     link(url) {
         super.link(url);
     }
+}
+
+function backEvent() {
+    this.link('/')
 }

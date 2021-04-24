@@ -12,6 +12,8 @@ export default class Component {
     }
 
     link(url) {
+        const page = this.$parent.proxy.page.replace('/', '')
+        this.$parent[page ? page : 'list'].destroy()
         this.$parent.proxy.page = url
 
         const baseUrl = window.location.protocol + "//" + window.location.host
@@ -21,7 +23,7 @@ export default class Component {
     }
 
     render() {
-        console.clear()
+        // console.clear()
         this.$parent.$title.textContent = this.TITLE
 
         this.$root.innerHTML = ''
@@ -43,5 +45,11 @@ export default class Component {
 
     init() {
         throw new Error(`Метод init должен быть реализован в классе ${this.NAME}`)
+    }
+
+    destroy() {
+        process.env.NODE_ENV === 'development'
+            ? console.warn(`Метод destroy не реализован в классе ${this.NAME}`)
+            : console.clear()
     }
 }

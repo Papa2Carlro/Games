@@ -100,15 +100,23 @@
 
     user-select: none;
 
-    color: $title;
+    color: #ffffff;
     font-size: 40px;
     font-weight: 700;
-
-    transform: translate() scale();
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &.dark {
+        color: $title;
+    }
+
+    &[data-value='256'],
+    &[data-value='512'],
+    &[data-value='128'], {
+        font-size: 32px;
+    }
 }
 
 // 1200

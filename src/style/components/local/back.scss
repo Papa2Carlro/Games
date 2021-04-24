@@ -1,0 +1,23 @@
+.back {
+    display: flex;
+    justify-content: flex-start;
+
+    margin-bottom: 15px;
+
+    &__btn {
+        color: $white;
+        font-size: 17px;
+        font-weight: 700;
+
+        padding: 8px 14px;
+        border-radius: 5px;
+        background: $btn2048;
+
+        cursor: pointer;
+        transition: .3s 0s;
+
+        &:hover {
+            background: $btn20481;
+        }
+    }
+}

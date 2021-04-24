@@ -7,6 +7,7 @@ export default function keydown(e) {
     this.allowed = false
     setTimeout(() => this.allowed = true, 260)
 
+    let create = true
     const tails = []
 
     this.field.map((row, index) => {
@@ -28,16 +29,18 @@ export default function keydown(e) {
 
                 for (let i = 0; i < 4; i++) {
                     if (i === y) {
+                        create = false
                         break
-                    } else if (this.field[i][x] === this.field[y][x]) {
-                        this.field[i][x] = this.field[y][x] * 2
-
+                    } else if (this.field[i][x] === this.field[y][x] && emptyTail.call(this, i, x, y, 'y', '-')) {
+                        create = true
                         setTail.call(this, tail.dom, x, i, index)
-                        mergeTail.call(this, x, i, this.field[i][x])
+                        mergeTail.call(this, x, i, this.field[i][x] * 2)
 
+                        this.field[i][x] = this.field[y][x] * 2
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[i][x]) {
+                        create = true
                         this.field[i][x] = this.field[y][x]
 
                         setTail.call(this, tail.dom, x, i, index)
@@ -46,6 +49,8 @@ export default function keydown(e) {
                     }
                 }
             }
+
+            if (create) createTail.call(this, 'random')
             break
 
         case 'ArrowDown':
@@ -60,8 +65,10 @@ export default function keydown(e) {
 
                 for (let i = 3; i >= 0; i--) {
                     if (i === y) {
+                        create = false
                         break
-                    } else if (this.field[i][x] === this.field[y][x]) {
+                    } else if (this.field[i][x] === this.field[y][x] && emptyTail.call(this, i, x, y, 'y')) {
+                        create = true
                         this.field[i][x] = this.field[y][x] * 2
 
                         setTail.call(this, tail.dom, x, i, index)
@@ -70,6 +77,7 @@ export default function keydown(e) {
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[i][x]) {
+                        create = true
                         this.field[i][x] = this.field[y][x]
 
                         setTail.call(this, tail.dom, x, i, index)
@@ -78,6 +86,8 @@ export default function keydown(e) {
                     }
                 }
             }
+
+            if (create) createTail.call(this, 'random')
             break
 
         case 'ArrowLeft':
@@ -92,8 +102,10 @@ export default function keydown(e) {
 
                 for (let i = 0; i < 4; i++) {
                     if (i === x) {
+                        create = false
                         break
-                    } else if (this.field[y][i] === this.field[y][x]) {
+                    } else if (this.field[y][i] === this.field[y][x] && emptyTail.call(this, i, x, y, 'x', '-')) {
+                        create = true
                         this.field[y][i] = this.field[y][x] * 2
 
                         setTail.call(this, tail.dom, i, y, index)
@@ -102,6 +114,7 @@ export default function keydown(e) {
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[y][i]) {
+                        create = true
                         this.field[y][i] = this.field[y][x]
 
                         setTail.call(this, tail.dom, i, y, index)
@@ -110,6 +123,8 @@ export default function keydown(e) {
                     }
                 }
             }
+
+            if (create) createTail.call(this, 'random')
             break
 
         case 'ArrowRight':
@@ -124,8 +139,10 @@ export default function keydown(e) {
 
                 for (let i = 3; i >= 0; i--) {
                     if (i === x) {
+                        create = false
                         break
-                    } else if (this.field[y][i] === this.field[y][x]) {
+                    } else if (this.field[y][i] === this.field[y][x] && emptyTail.call(this, i, x, y, 'x')) {
+                        create = true
                         this.field[y][i] = this.field[y][x] * 2
 
                         setTail.call(this, tail.dom, i, y, index)
@@ -134,6 +151,7 @@ export default function keydown(e) {
                         this.field[y][x] = 0
                         break
                     } else if (!this.field[y][i]) {
+                        create = true
                         this.field[y][i] = this.field[y][x]
 
                         setTail.call(this, tail.dom, i, y, index)
@@ -142,10 +160,10 @@ export default function keydown(e) {
                     }
                 }
             }
+
+            if (create) createTail.call(this, 'random')
             break
     }
-
-    createTail.call(this)
 }
 
 function getTail(x, y) {
@@ -158,4 +176,21 @@ function getTail(x, y) {
         })[0],
         index
     ]
+}
+
+function emptyTail(start, x, y, direct, type = '+') {
+    let empty = true
+    const end = direct === 'y' ? y : x
+
+    switch (type) {
+        case "+":
+            for (let j = start + 1; j < end; j++) empty = direct === 'y' ? !this.field[j][x] : !this.field[y][j]
+            break
+
+        case "-":
+            for (let j = end - 1; j > start; j--) empty = direct === 'y' ? !this.field[j][x] : !this.field[y][j]
+            break
+    }
+
+    return empty
 }

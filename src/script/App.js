@@ -23,11 +23,7 @@ export default class App {
     init() {
         window.addEventListener('load', () => {
             this.$loader.classList.add('hide')
-            this[!this.page ? 'list': this.page].render()
+            this.proxy.page = location.pathname
         })
-    }
-
-    get page() {
-        return location.pathname.replace('/', '')
     }
 }

@@ -1,7 +1,11 @@
+import backTemplate from "../../../helper/backTemplate"
+
 export default function template() {
     return `
         <div class="container">
             <div class="game2048">
+                ${backTemplate()}
+            
                 ${header()} 
                 
                 <ul class="game2048__list">
