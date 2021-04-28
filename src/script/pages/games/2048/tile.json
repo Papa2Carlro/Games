@@ -26,15 +26,12 @@
     "tile": "#EDCC61"
   },
   "512": {
-    "tile": "#EDC850",
-    "shadow": true
+    "tile": "#EDC850"
   },
   "1024": {
-    "tile": "#EDC53F",
-    "shadow": true
+    "tile": "#EDC53F"
   },
   "2048": {
-    "tile": "#EDC22E",
-    "shadow": true
+    "tile": "#EDC22E"
   }
 }

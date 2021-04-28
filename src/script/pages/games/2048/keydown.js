@@ -16,6 +16,8 @@ export default function keydown(e) {
         })
     })
 
+    console.log(tails)
+
     switch (e.key) {
         case 'ArrowUp':
             tails.sort((a, b) => {
@@ -31,26 +33,28 @@ export default function keydown(e) {
                     if (i === y) {
                         create = false
                         break
-                    } else if (this.field[i][x] === this.field[y][x] && emptyTail.call(this, i, x, y, 'y', '-')) {
-                        create = true
-                        setTail.call(this, tail.dom, x, i, index)
-                        mergeTail.call(this, x, i, this.field[i][x] * 2)
-
-                        this.field[i][x] = this.field[y][x] * 2
-                        this.field[y][x] = 0
-                        break
-                    } else if (!this.field[i][x]) {
+                    }
+                    // else if (this.field[i][x] === this.field[y][x] && emptyTail.call(this, i, x, y, 'y')) {
+                    //     create = true
+                    //     setTail.call(this, tail.dom, x, i, index)
+                    //     mergeTail.call(this, x, i, this.field[i][x] * 2)
+                    //
+                    //     this.field[i][x] = this.field[y][x] * 2
+                    //     this.field[y][x] = 0
+                    //     break
+                    // }
+                    else if (!this.field[i][x]) {
                         create = true
                         this.field[i][x] = this.field[y][x]
 
-                        setTail.call(this, tail.dom, x, i, index)
+                        // setTail.call(this, tail.dom, x, i, index)
                         this.field[y][x] = 0
                         break
                     }
                 }
             }
 
-            if (create) createTail.call(this, 'random')
+            // if (create) createTail.call(this, 'random')
             break
 
         case 'ArrowDown':
@@ -67,27 +71,29 @@ export default function keydown(e) {
                     if (i === y) {
                         create = false
                         break
-                    } else if (this.field[i][x] === this.field[y][x] && emptyTail.call(this, i, x, y, 'y')) {
-                        create = true
-                        this.field[i][x] = this.field[y][x] * 2
-
-                        setTail.call(this, tail.dom, x, i, index)
-                        mergeTail.call(this, x, i, this.field[i][x])
-
-                        this.field[y][x] = 0
-                        break
-                    } else if (!this.field[i][x]) {
+                    }
+                    // else if (this.field[i][x] === this.field[y][x] && emptyTail.call(this, i, x, y, 'y')) {
+                    //     create = true
+                    //     this.field[i][x] = this.field[y][x] * 2
+                    //
+                    //     setTail.call(this, tail.dom, x, i, index)
+                    //     mergeTail.call(this, x, i, this.field[i][x])
+                    //
+                    //     this.field[y][x] = 0
+                    //     break
+                    // }
+                    else if (!this.field[i][x]) {
                         create = true
                         this.field[i][x] = this.field[y][x]
 
-                        setTail.call(this, tail.dom, x, i, index)
+                        // setTail.call(this, tail.dom, x, i, index)
                         this.field[y][x] = 0
                         break
                     }
                 }
             }
 
-            if (create) createTail.call(this, 'random')
+            // if (create) createTail.call(this, 'random')
             break
 
         case 'ArrowLeft':
@@ -104,27 +110,29 @@ export default function keydown(e) {
                     if (i === x) {
                         create = false
                         break
-                    } else if (this.field[y][i] === this.field[y][x] && emptyTail.call(this, i, x, y, 'x', '-')) {
-                        create = true
-                        this.field[y][i] = this.field[y][x] * 2
-
-                        setTail.call(this, tail.dom, i, y, index)
-                        mergeTail.call(this, i, y, this.field[y][i])
-
-                        this.field[y][x] = 0
-                        break
-                    } else if (!this.field[y][i]) {
+                    }
+                    // else if (this.field[y][i] === this.field[y][x] && emptyTail.call(this, i, x, y, 'x')) {
+                    //     create = true
+                    //     this.field[y][i] = this.field[y][x] * 2
+                    //
+                    //     setTail.call(this, tail.dom, i, y, index)
+                    //     mergeTail.call(this, i, y, this.field[y][i])
+                    //
+                    //     this.field[y][x] = 0
+                    //     break
+                    // }
+                    else if (!this.field[y][i]) {
                         create = true
                         this.field[y][i] = this.field[y][x]
 
-                        setTail.call(this, tail.dom, i, y, index)
+                        // setTail.call(this, tail.dom, i, y, index)
                         this.field[y][x] = 0
                         break
                     }
                 }
             }
 
-            if (create) createTail.call(this, 'random')
+            // if (create) createTail.call(this, 'random')
             break
 
         case 'ArrowRight':
@@ -141,29 +149,33 @@ export default function keydown(e) {
                     if (i === x) {
                         create = false
                         break
-                    } else if (this.field[y][i] === this.field[y][x] && emptyTail.call(this, i, x, y, 'x')) {
-                        create = true
-                        this.field[y][i] = this.field[y][x] * 2
-
-                        setTail.call(this, tail.dom, i, y, index)
-                        mergeTail.call(this, i, y, this.field[y][i])
-
-                        this.field[y][x] = 0
-                        break
-                    } else if (!this.field[y][i]) {
+                    }
+                    // else if (this.field[y][i] === this.field[y][x] && emptyTail.call(this, i, x, y, 'x')) {
+                    //     create = true
+                    //     this.field[y][i] = this.field[y][x] * 2
+                    //
+                    //     setTail.call(this, tail.dom, i, y, index)
+                    //     mergeTail.call(this, i, y, this.field[y][i])
+                    //
+                    //     this.field[y][x] = 0
+                    //     break
+                    // }
+                    else if (!this.field[y][i]) {
                         create = true
                         this.field[y][i] = this.field[y][x]
 
-                        setTail.call(this, tail.dom, i, y, index)
+                        // setTail.call(this, tail.dom, i, y, index)
                         this.field[y][x] = 0
                         break
                     }
                 }
             }
 
-            if (create) createTail.call(this, 'random')
+            // if (create) createTail.call(this, 'random')
             break
     }
+
+    console.log(this.field)
 }
 
 function getTail(x, y) {
@@ -178,18 +190,20 @@ function getTail(x, y) {
     ]
 }
 
-function emptyTail(start, x, y, direct, type = '+') {
+function emptyTail(start, x, y, direct) {
     let empty = true
     const end = direct === 'y' ? y : x
 
-    switch (type) {
-        case "+":
-            for (let j = start + 1; j < end; j++) empty = direct === 'y' ? !this.field[j][x] : !this.field[y][j]
-            break
-
-        case "-":
-            for (let j = end - 1; j > start; j--) empty = direct === 'y' ? !this.field[j][x] : !this.field[y][j]
-            break
+    if (start < end) {
+        for (let j = start + 1; j < end; j++) {
+            empty = direct === 'y' ? !this.field[j][x] : !this.field[y][j]
+            if (!empty) return
+        }
+    } else {
+        for (let j = start - 1; j > end; j--) {
+            empty = direct === 'y' ? !this.field[j][x] : !this.field[y][j]
+            if (!empty) return
+        }
     }
 
     return empty

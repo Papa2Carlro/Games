@@ -31,6 +31,7 @@ export default function mergeTail(x, y, value, index, ms = 180) {
 
         mergeList[1].dom.remove()
         this.tailList = this.tailList.filter((_, i) => i !== inx[1])
+        console.log(this.tailList)
 
         setTimeout(() => {
             css(mergeList[0].dom, {

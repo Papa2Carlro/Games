@@ -1,9 +1,6 @@
 // Class
 import Component from "../../../class/Component"
-// Data
-import tail from './tile.json'
 // Help
-import coords from "./coords"
 import template from "./template"
 import createTail from "./createTail"
 import css from "../../../helper/css"
@@ -71,9 +68,11 @@ export default class GAME_2048 extends Component {
 
     init() {
         this.setSize()
-        this.paint()
+        this.newGame()
+        this.bgTail()
 
         this.$backBtn.addEventListener('click', backEvent.bind(this))
+        this.$newGame.addEventListener('click', () => this.newGame())
         document.addEventListener('keydown', keydown.bind(this))
     }
 
@@ -94,21 +93,14 @@ export default class GAME_2048 extends Component {
 
         const tests = [
             { value: 2, x: 0, y: 0 },
-            { value: 8, x: 1, y: 0 },
-            { value: 4, x: 2, y: 0 },
-            { value: 2, x: 3, y: 0 },
+            { value: 4, x: 0, y: 1 },
+            { value: 4, x: 0, y: 2 },
+            { value: 2, x: 0, y: 3 },
         ]
 
-        tests.map(obj => createTail.call(this, 'obj', obj))
+        // tests.map(obj => createTail.call(this, 'obj', obj))
 
-        // for (let i = 0; i < 2; i++) createTail.call(this, 'random')
-    }
-
-    paint() {
-        this.newGame()
-        this.bgTail()
-
-        this.$newGame.addEventListener('click', () => this.newGame())
+        for (let i = 0; i < 2; i++) createTail.call(this, 'random')
     }
 
     bgTail() {
@@ -121,7 +113,6 @@ export default class GAME_2048 extends Component {
             }
         }
     }
-
     setSize() {
         const lists = ['$body', '$canvas']
 
